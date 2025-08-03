@@ -1,0 +1,270 @@
+@import url("https://fonts.googleapis.com/css2?family=Lalezar&family=Playpen+Sans+Arabic:wght@100..800&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "lalezar";
+}
+
+:root {
+  --text: rgba(126, 126, 126, 0.74);
+  --main-color: rgba(130, 23, 231, 0.829);
+}
+body {
+  direction: rtl;
+}
+/* CONTAINER LOGIN */
+.container-login {
+  display: flex;
+  max-width: 120rem;
+  align-items: center;
+  justify-content: center;
+  height: 49.6rem;
+  margin: 4%;
+  border-radius: 32px;
+  overflow: hidden;
+}
+
+/*TO CONTAINER*/
+.login-page {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 15rem;
+  max-width: 18rem;
+  margin-right: -75px;
+  margin-top: 22px;
+}
+/* SECTION IMAGE LOGIN*/
+.img-login {
+  width: 50%;
+  height: 100%;
+  background-image: url("/src/image/professional-programmer-working-late-dark-office.jpg");
+  background-position: center;
+  background-size: cover;
+  border-radius: 4px 0 0 4px;
+}
+.icon-facebook {
+  width: 6%;
+}
+.icon-google {
+  width: 8%;
+  padding-left: 6px;
+}
+/* header container */
+.header {
+  width: 68%;
+  height: 80px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  backdrop-filter: blur(5px);
+  border-radius: 18px;
+  background-color: rgba(227, 220, 243, 0.548);
+  border: 1px solid var(--main-color);
+}
+.container-header {
+  display: flex;
+  position: fixed;
+  top: 15px;
+  width: 100%;
+  justify-content: center;
+}
+.span {
+  font-size: 24px;
+}
+/* planit logo */
+.planit-name {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  cursor: pointer;
+  color: var(--main-color);
+}
+.icon-planit {
+  width: 28px;
+  padding-right: 3px;
+}
+/* ul header  */
+.container-li {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+.container-li li {
+  font-size: 13.5px;
+  display: flex;
+  gap: 5px;
+}
+.ic-he {
+  color: var(--main-color);
+  margin-right: 5px;
+}
+.header ul {
+  display: flex;
+}
+.header ul li {
+  list-style: none;
+  cursor: pointer;
+}
+/* btn header */
+.btn-header {
+  font-size: 14px;
+  padding: 9px 29px;
+  color: aliceblue;
+  border: none;
+  background-color: var(--main-color);
+  border-radius: 8px;
+  cursor: pointer;
+}
+/* buttons */
+.buttons {
+  margin-top: 30px;
+  color: rgb(54, 54, 54);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 15rem;
+  max-width: 22rem;
+  height: 180px;
+}
+/* text login */
+.text-login {
+  width: 100%;
+}
+p {
+  width: 100%;
+  color: var(--text);
+  font-size: 12px;
+}
+/*  CONTAINER BTN */
+.btn-continue {
+  background: inherit;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border: 2px solid;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+.sing{
+  font-size: 29px;
+}
+/* CONTANER LOGIN */
+.logik {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+.login-input {
+  width: 100%;
+  margin-top: 35px;
+}
+.input {
+  width: 100%;
+  position: relative;
+  margin-bottom: 20px;
+  background: inherit;
+}
+.i {
+  position: absolute;
+  right: 88%;
+  bottom: 17px;
+  color: rgba(51, 51, 51, 0.822);
+  cursor: pointer;
+}
+/* buttons icon */
+.btn-icon {
+  font-size: large;
+  padding-left: 2px;
+}
+.input input {
+  width: 100%;
+  padding: 13px;
+  outline: none;
+  border-radius: 7px;
+  background: inherit;
+  border: 2px solid var(--text);
+}
+.border {
+  justify-content: center;
+  background-color: var(--text);
+  width: 50%;
+padding:1.5px 0px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+.btn-login {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(
+    to right,
+    rgba(6, 73, 218, 0.836),
+    rgb(180, 8, 180)
+  );
+  color: rgba(240, 248, 255, 0.849);
+  font-size: 25px;
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
+.login-text {
+  margin-bottom: -10px;
+}
+.text-end-login {
+  display: flex;
+  height:25px;
+  gap: 7px;
+  margin-top: 25px;
+}
+.p {
+  margin-top: 5px;
+  font-size: 14px;
+  font-family: sans-serif;
+  color: var(--text);
+}
+.a {
+  font-size: 16px;
+  color: rgb(48, 47, 47);
+  white-space: nowrap;
+  margin-bottom: 100px;
+}
+
+/* MEDIA SCREEN */
+@media screen and (max-width: 1200px) {
+  .header {
+    display: none;
+  }
+}
+@media screen and (max-width: 986px) {
+  .img-login {
+    display: none;
+  }
+  .logik {
+    width: 100%;
+  }
+  .login-page {
+    margin-top: 0;
+  }
+  .container-login {
+    margin: 60px 0;
+  }
+  .login-page {
+    width: 100%;
+  }
+}
+
+/* active mode */
+.active {
+  display: none;
+}
+
+/* section sing up */
+.text-sing {
+  padding: 5px 15px;
+}

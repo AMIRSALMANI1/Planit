@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
+    />
+    <link rel="stylesheet" href="/src/css/login.css" />
+    <title>Login planit</title>
+  </head>
+  <body>
+    <!-- login and singin -->
+    <main>
+      <!-- navar for all page -->
+      <header class="container-header">
+        <div class="header">
+          <div class="planit-name">
+            <img src="/src/image/book_8108155.png" alt="" class="icon-planit" />
+            <h3>پلانیت</h3>
+          </div>
+          <ul class="container-li">
+            <li><i class="ri-mail-fill ic-he"></i>قالب ها</li>
+            <li><i class="ri-team-fill ic-he"></i>برای تیم</li>
+            <li><i class="ri-daller-fill ic-he"></i>قیمت گذاری</li>
+            <li><i class="ri-lock-fill ic-he"></i>ورود به سیستم</li>
+          </ul>
+          <button class="btn-header">شروع رایگان</button>
+        </div>
+      </header>
+
+      <!-- container login page -->
+      <div class="container-login loginsec">
+        <!-- img main -->
+        <div class="img-login"></div>
+        <div class="logik">
+          <from class="login-page">
+            <div class="text-login">
+              <h1>خوش برگشتی <span class="span">😊</span></h1>
+              <p>برای ادامه وارد شوید</p>
+            </div>
+            <!-- buttons -->
+            <div class="buttons">
+              <button class="btn-continue">
+                <img
+                  src="/src/image/google_2702602.png"
+                  alt=""
+                  class="icon-google"
+                />
+                ادامه با گوگل
+              </button>
+
+              <button class="btn-continue">
+                <img
+                  src="/src/image/facebook_168754.png"
+                  alt=""
+                  class="icon-facebook"
+                />
+                ادامه با فیسبوک
+              </button>
+
+              <button class="btn-continue">
+                <i class="ri-apple-fill btn-icon"></i>
+                ادامه با اپل
+              </button>
+            </div>
+            <div class="border"></div>
+
+            <!-- inputs and btn login-->
+            <div class="login-input">
+              <div class="input">
+                <input
+                  type="email"
+                  name="name"
+                  id="name"
+                  placeholder="ایمیل"
+                  requred
+                  autofocus
+                />
+                <i class="ri-mail-fill i"></i>
+              </div>
+
+              <div class="input">
+                <input
+                  type="password"
+                  name="last"
+                  id="last"
+                  placeholder="پسورد"
+                  required
+                />
+                <i class="ri-eye-fill i"></i>
+              </div>
+            </div>
+            <!-- button login -->
+            <button class="btn-login">ورود</button>
+            <p class="login-text">
+              با ادامه دادن با گوگل , فیسبوک , اپل یا ایمیل شما برای
+              <a href="">شرایط و ضوابط سرویس</a> پلانیت
+              <a href="">سیاست حفظ حریم خصوصی</a> , موافقت می کنید.
+            </p>
+            <!-- border -->
+            <div class="border"></div>
+            <div class="text-end-login">
+              <p class="p">از قبل حساب کاربری ندارید ؟</p>
+              <a href="#" class="a logina">ثبت نام</a>
+            </div>
+          </from>
+        </div>
+      </div>
+
+      <!-- container sing page -->
+      <div class="container-login singinsec active ">
+        <!-- img main -->
+        <div class="img-login"></div>
+        <div class="logik">
+          <from class="login-page">
+            <div class="text-login text-sing">
+              <h1>خوش امدید <span class="span">😊</span></h1>
+              <p>برای ادامه حسابت رو بساز</p>
+            </div>
+            <!-- inputs and btn login-->
+            <div class="login-input">
+              <div class="input">
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="نام کاربری"
+                  requred
+                  autofocus
+                />
+                <i class="ri-user-fill i"></i>
+              </div>
+              <div class="input">
+                <input
+                  type="email"
+                  name="name"
+                  id="name"
+                  placeholder="ایمیل"
+                  requred
+                />
+                <i class="ri-mail-fill i"></i>
+              </div>
+
+              <div class="input">
+                <input
+                  type="password"
+                  name="last"
+                  id="last"
+                  placeholder="رمز عبور"
+                  required
+                />
+                <i class="ri-eye-fill i"></i>
+              </div>
+            </div>
+            <!-- button login -->
+            <button class="btn-login">ثبت نام</button>
+            <p class="login-text">
+              با ادامه دادن با گوگل , فیسبوک , اپل یا ایمیل شما برای
+              <a href="">شرایط و ضوابط سرویس</a> پلانیت
+              <a href="">سیاست حفظ حریم خصوصی</a> , موافقت می کنید.
+            </p>
+            <!-- border -->
+            <div class="border"></div>
+            <div class="text-end-login">
+              <p class="p">از قبل حساب کاربری ندارید ؟</p>
+              <a href="#" class="a singa">ورود</a>
+            </div>
+          </from>
+        </div>
+      </div>
+    </main>
+    <script src="/src/js/login.js"></script>
+  </body>
+</html>
