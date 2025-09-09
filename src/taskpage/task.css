@@ -1,0 +1,154 @@
+:root {
+  --text: rgb(141, 141, 141);
+  --icon-color: rgb(34, 34, 34);
+  --main-color: rgba(130, 23, 231, 0.829);
+  --main-section: rgb(250, 236, 253);
+  --sections-color: rgba(252, 244, 255, 0.89);
+  --border-color: rgb(75, 75, 75);
+  --icon-color: rgba(118, 20, 209, 0.829);
+  --black-text: rgb(65, 65, 65);
+}
+
+.main-page {
+  width: 84%;
+  height: 80vh;
+  margin-bottom: 18px;
+  position: absolute;
+  top: 183px;
+  left: 0;
+  padding: 0 15px 10px 45px;
+  border-radius: 12px;
+  overflow-y: auto;
+} 
+.main-section {
+  min-height: 75vh;
+  display: flex;
+  justify-content: space-between;
+}
+.sections {
+  width: 22%;
+  background-color: #e6e6e665;
+}
+.todo-text {
+  background-color: var(--sections-color);
+  border-radius: 10px;
+}
+.text-task {
+  display: flex;
+  position: fixed;
+  top: 120px;
+  width: 18vw;
+  justify-content: space-between;
+  padding: 17px 20px;
+  background-color: var(--sections-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.055);
+}
+.item {
+  background-color: var(--sections-color);
+  border-radius: 10px;
+  padding: 15px 18px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.062);
+}
+/* btn */
+.add-task-btn {
+  margin-bottom: 10px;
+  width: 9.5%;
+  height: 2.2rem;
+  color: aliceblue;
+  background-color: var(--main-color);
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  top: 75px;
+  right: 322px;
+  padding-top: 0.3rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.062);
+}
+.input-cont {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(131, 131, 131, 0.486);
+  z-index: 20;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  display: none;
+}
+.input-items {
+  width: 40vw;
+  height: 44vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: var(--sections-color);
+  border-radius: 12px;
+  position: relative;
+}
+.input-items input {
+  padding: 6px 26px 6px 34px;
+  border: 1px solid rgba(121, 121, 121, 0.623);
+  border-radius: 5px;
+  outline: none;
+}
+.input-items textarea {
+  padding: 6px 25px 6px 0px;
+  border: 1px solid rgba(121, 121, 121, 0.623);
+  border-radius: 5px;
+  outline: none;
+}
+.input-items button {
+  font-size: 15px;
+  padding: 7px 89px;
+  background-color: rgb(24, 23, 23);
+  color: aliceblue;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.input-name {
+  position: relative;
+}
+.input-desc {
+  position: relative;
+}
+.input-name i {
+  position: absolute;
+  top: 8px;
+  right: 7px;
+  font-size: 15px;
+  color: var(--black-text);
+}
+.input-desc i {
+  position: absolute;
+  top: 8px;
+  right: 7px;
+  font-size: 14px;
+  color: var(--black-text);
+}
+.icon-input {
+  font-size: 26px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 20px;
+  color: var(--black-text);
+  cursor: pointer;
+}
+.active-input {
+  display: grid;
+}
+/* -----------------------------------------------*/
+/* media */
+@media screen and (max-width: 1000px) {
+  .main-page {
+    width: 100%;
+    padding-right: 50px;
+  }
+}

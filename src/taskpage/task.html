@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
+    />
+    <link rel="stylesheet" href="./task.css" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <title>Task page</title>
+  </head>
+  <body>
+    <div class="input-cont">
+      <div class="input-items">
+        <div class="icon-input"><i class="ri-close-line"></i></div>
+        <div class="input-name">
+          <i class="ri-ball-pen-line"></i
+          ><input id="input-modal-name" type="text" placeholder="نام فعالیت" />
+        </div>
+        <div class="input-desc">
+          <i class="ri-draft-line"></i>
+          <textarea
+            id="input-modal-desc"
+            type="text"
+            placeholder="فرایند فعالیت"
+            required
+          ></textarea>
+        </div>
+        <button id="add-todo-btn">ایجاد فعالیت</button>
+      </div>
+    </div>
+    <main>
+      <!-- -------------------------------------------------- -->
+      <!-- sidebor section  -->
+      <section class="sidebor">
+        <!-- logo -->
+        <div class="logo-sidebor">
+          <div class="img-header">
+            <img src="/src/image/book_8108155.png" alt="image-logo" />
+          </div>
+          <h2>پلانیت</h2>
+        </div>
+
+        <!-- Opstions -->
+        <ul class="container-opstions-sidbor">
+          <li>
+            <i class="ri-home-4-fill"></i>
+            <p>خانه</p>
+          </li>
+          <li>
+            <i class="ri-calendar-todo-fill"></i>
+            <p>تقویم</p>
+          </li>
+          <li>
+            <i class="ri-building-2-fill"></i>
+            <p>شاخص</p>
+          </li>
+          <li>
+            <i class="ri-building-2-fill"></i>
+            <p>بهره وری</p>
+          </li>
+        </ul>
+
+        <!-- OPSTION-->
+        <div class="opstions">
+          <div class="menu-item" onclick="toggleMenu('favorite')">
+            <span class="icon"><i class="ri-star-fill"></i></span>
+            <span class="label">موردعلاقه</span>
+            <span class="arrow" id="arrow-favorite">></span>
+          </div>
+          <div class="submenu" id="favorite">
+            <div class="submenu-item">Project A</div>
+            <div class="submenu-item">Project B</div>
+          </div>
+
+          <!-- Workspace -->
+          <div class="menu-item" onclick="toggleMenu('workspace')">
+            <span class="icon"><i class="ri-rocket-fill"></i></span>
+            <span class="label">Workspace</span>
+            <span class="arrow" id="arrow-workspace">></span>
+          </div>
+          <div class="submenu" id="workspace">
+            <div class="submenu-item">Team Files</div>
+            <div class="submenu-item">Shared Items</div>
+          </div>
+        </div>
+
+        <div class="upgrade"></div>
+
+        <div class="logout-sidebor">
+          <a class="logout" href="./src/login/login.html">
+            <i class="ri-logout-box-line"></i>
+            <h3>خروج</h3>
+          </a>
+        </div>
+      </section>
+
+      <!-- -------------------------------------------------- -->
+      <!-- header section  -->
+      <header>
+        <div class="header">
+          <!-- text header -->
+          <div class="text-header">
+            <h3>خانه</h3>
+            <div class="border-text"></div>
+          </div>
+          <!-- searchbox and other -->
+          <div class="other-header">
+            <!-- profile img -->
+            <div class="img-header">
+              <img src="/src/image/book_8108155.png" alt="" />
+            </div>
+            <i class="ri-notification-2-line i-header"></i>
+            <i class="ri-add-circle-line i-header"></i>
+            <div class="search-box">
+              <i class="ri-search-line"></i>
+              <input
+                type="search"
+                class="search-header"
+                placeholder="جست و جو"
+                required
+              />
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- -------------------------------------------------- -->
+      <!-- mainpage -->
+      <button class="add-task-btn">اضافه کردن فعالیت</button>
+      <div class="main-page">
+        <!-- btn -->
+        <div class="main-section">
+          <!-- backlog -->
+          <div class="backlog sections">
+            <!-- text backlog -->
+            <div class="text-task">
+              <h3>کارهای عقب افتاده</h3>
+              <div class="icon-todo-text">
+                <i class="ri-add-fill plus"></i>
+                <i class="ri-more-fill more"></i>
+              </div>
+            </div>
+            <!-- items -->
+            <div class="container-item" id="backlog-drop"></div>
+          </div>
+          <!--todo -->
+          <div class="todo-task sections">
+            <!-- text -->
+            <div class="text-task">
+              <h3>انجام دادن</h3>
+              <div class="icon-todo-text">
+                <i class="ri-add-fill plus"></i>
+                <i class="ri-more-fill more"></i>
+              </div>
+            </div>
+            <!-- items -->
+            <div class="container-item" id="todo-drop"></div>
+          </div>
+          <!-- in progress -->
+          <div class="in-progress sections">
+            <!-- text -->
+            <div class="text-task">
+              <h3>درحال انجام</h3>
+              <div class="icon-todo-text">
+                <i class="ri-add-fill plus"></i>
+                <i class="ri-more-fill more"></i>
+              </div>
+            </div>
+            <!-- items -->
+            <div class="container-item" id="in-progress-drop"></div>
+          </div>
+          <!-- review -->
+          <div class="review sections">
+            <!-- text -->
+            <div class="text-task">
+              <h3>بررسی</h3>
+              <div class="icon-todo-text">
+                <i class="ri-add-fill plus"></i>
+                <i class="ri-more-fill more"></i>
+              </div>
+            </div>
+            <!-- items -->
+            <div class="container-item" id="review-drop"></div>
+          </div>
+        </div>
+      </div>
+      <div class="section-addtodo"></div>
+    </main>
+    <script src="./task.js"></script>
+  </body>
+</html>
