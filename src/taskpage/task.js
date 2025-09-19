@@ -1,5 +1,5 @@
 "use strice";
-
+import { createTodo, getTodos } from "../js/api.js";
 // sidebor  menu
 function toggleMenu(id) {
   const arrow = document.getElementById("arrow-" + id);
@@ -29,7 +29,14 @@ const addTodoBtn = document.getElementById("add-todo-btn");
 const plus = document.querySelectorAll(".plus");
 // var container
 let containerColumn = null;
+//  btn add column
+plus.forEach((item) => {
+  item.addEventListener("click", () => {
+    containerColumn = item.closest(".sections");
+    containerModal.classList.toggle("active-input");
 
+  });
+});
 // close modal
 closeBtn.addEventListener("click", () => {
   containerModal.classList.remove("active-input");
@@ -49,14 +56,6 @@ addTodo.addEventListener("click", () => {
   containerModal.classList.add("active-input");
 });
 
-//  btn add column
-plus.forEach((item) => {
-  item.addEventListener("click", () => {
-    containerColumn = item.closest(".sections");
-    containerModal.classList.toggle("active-input");
-  });
-});
-
 // date persian
 const now = new Date();
 const option = {
@@ -67,19 +66,83 @@ const option = {
 const persianDate = new Intl.DateTimeFormat("fa-IR", option).format(now);
 
 // btn add modal
-addTodoBtn.addEventListener("click", () => {
-  const titel = inputName.value.trim();
+addTodoBtn.addEventListener("click", async () => {
+  const title = inputName.value.trim();
   const desc = inputDesc.value.trim();
-  if (!titel) return;
+  if (!title) return;
+  const newTodo = {
+    title: title,
+    discription: desc,
+    status: containerColumn,
+    createdAt: new Date(),
+  };
+  const result = await createTodo(newTodo);
+  updateUI();
+  // addTodoFun(titel, desc);
+  // drag and drop
+});
+// delete item
+document.addEventListener("click", (e) => {
+  const deleteBtn = e.target.closest(".delete-todo-icon");
+  if (!deleteBtn) return;
+  const card = deleteBtn.parentElement.parentElement.parentElement;
+  if (!card) return;
 
+  card.remove();
+});
+
+// add todo html
+const addTodoFun = function (titel, desc, status) {
   const todoDiv = document.createElement("div");
   todoDiv.classList.add("item", "container-planning");
   todoDiv.setAttribute("draggable", "true");
+  dragAndDrop(todoDiv);
 
-  // drag and drop
+  todoDiv.innerHTML = `       
+  <!-- ${titel} -->
+
+  <!-- button -->
+  <div class = 'container-icon-todo'>
+  <div class="planning-cont">${titel}</div>
+    <div class="icons-todo">
+      <i class="ri-close-circle-line delete-todo-icon"></i>
+      <i class="ri-edit-line edite-todo-icon"></i>
+    </div>
+</div>
+  <div class="cont-text-todo">
+  <p>بروز رسانی فهرست نیازمندی ها</p>
+  <p class="create">${desc}</p>
+  <div class="date">${persianDate}</div>
+  `;
+  
+  switch (status) {
+    case "doing":
+      containerColumn = document.querySelector(`[data-status="${status}"]`);
+      break;
+    case "do":
+      containerColumn = document.querySelector(`[data-status="${status}"]`);
+      break;
+    case "complete":
+      containerColumn = document.querySelector(`[data-status="${status}"]`);
+      break;
+    case "complete":
+      containerColumn = document.querySelector(`[data-status="${status}"]`);
+      break;
+    default:
+      break;
+  }
+
+  console.log(column);
+
+  containerColumn.querySelector(".container-item").appendChild(todoDiv);
+  containerModal.classList.toggle("active-input");
+  clearModalInput();
+};
+
+// drag and drop
+const dragAndDrop = function (todoDiv) {
   todoDiv.addEventListener("dragstart", (e) => {
     let select = e.target;
-    console.log(e.target);
     backLog.addEventListener("dragover", (e) => {
       e.preventDefault();
     });
@@ -112,213 +175,33 @@ addTodoBtn.addEventListener("click", () => {
       select = null;
     });
   });
-  todoDiv.innerHTML = `       
-  <!-- ${titel} -->
-
-  <!-- button -->
-  <div class="planning-cont">${titel}</div>
-  <div class="cont-text-todo">
-  <p>بروز رسانی فهرست نیازمندی ها</p>
-  <p class="create">${desc}</p>
-  <div class="date">${persianDate}</div>
-  `;
-  // console.log(todoDiv);
-
-  containerColumn.querySelector(".container-item").appendChild(todoDiv);
-  containerModal.classList.toggle("active-input");
-  clearModalInput();
+};
+// delete all
+const closeTodo = document.querySelectorAll(".all-delete");
+closeTodo.forEach((item) => {
+  item.addEventListener("click", () => {
+    const column = item.parentElement.parentElement.parentElement;
+    const tasksContainer = column.querySelector(".container-item");
+    tasksContainer.innerHTML = "";
+  });
 });
-
 // clear input modal
 const clearModalInput = function () {
   inputDesc.value = "";
   inputName.value = "";
 };
 
+// update ui
+async function updateUI() {
+  const dataTodos = await getTodos();
+
+  for (let i = 0; i < dataTodos.length; i++) {
+    const todo = dataTodos[i];
+    addTodoFun(todo.title, todo.discription, todo.status);
+  }
+}
+updateUI();
+// Delete todo
+
 // API
 // get api
-const API_BASE = "https://68b9c31b6aaf059a5b58b010.mockapi.io";
-
-async function fetchTasks() {
-  try {
-    const res = await fetch(`${API_BASE}/task`);
-    if (!res.ok) throw new Error("HTTP" + res.status);
-    const tasks = await res.json();
-    renderTasks(tasks);
-  } catch (err) {
-    console.error("خطا در fetchTask:", err);
-  }
-}
-
-async function addTasks(title, description, status = "backLog") {
-  const payload = {
-    title,
-    description,
-    status,
-    createdAt: new Date().toISOString(),
-  };
-  try {
-    const res = await fetch(`${API_BASE}/task`, {
-      method: "post",
-      headers: { "Content-Type": " appliction/json" },
-      body: JSON.stringify(payload),
-    });
-    if (!res.ok) throw new Error("HTTP", res.status);
-    await fetchTasks();
-    inputName.value = "";
-    inputDesc.value = "";
-  } catch (err) {
-    console.error("خطا در addTask", err);
-    alert("خطا در ایجاد تسک");
-  }
-}
-
-async function updateTask(id, fields) {
-  try {
-    const res = await fetch(`${API_BASE}/task/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(fields),
-    });
-    if (!res.ok) throw new Error("HTTP" + res.status);
-    await fetchTasks();
-  } catch (err) {
-    console.err();
-    alert("خطا در بروزرسانی تسک: " + err.message);
-  }
-}
-
-async function deleteTask(id) {
-  if (!confirm("ایا برای حذف مطمئن هستید")) return;
-  try {
-    const res = await fetch(`${API_BASE}/task/${id}`, {
-      method: "DELETE",
-    });
-    if (!res.ok) throw new Error("HTTP" + res.status);
-    await fetchTasks();
-  } catch (err) {
-    console.error("خطا در deleteTask:", err);
-    alert("خطا در حذف تسک: " + err.message);
-  }
-}
-
-const backlogDrop = document.getElementById("backlog-drop");
-const inProgresDrop = document.getElementById("in-progress-drop");
-const reviewDrop = document.getElementById("review-drop");
-const todoDrop = document.getElementById("todo-drop");
-function clearColumns() {
-  backlogDrop.innerHTML = "";
-  inProgresDrop.innerHTML = "";
-  todoDrop.innerHTML = "";
-  reviewDrop.innerHTML = "";
-}
-
-function createTaskCard(task) {
-  const el = document.createElement("div");
-  el.className = "task-card";
-  el.dataset.id = task.id;
-
-  const title = document.createElement("div");
-  title.className = "task-title";
-  title.textContent = task.description;
-  el.appendChild(title);
-
-  if (task.description) {
-    const desc = document.createElement("div");
-    desc.className = "task-desc";
-    desc.textContent = task.description;
-    el.appendChild;
-  }
-
-  const meta = document.createElement("div");
-  meta.className = "task-meta";
-  meta.innerHTML = `<small>${
-    task.createdAt ? new Date(task.createdAt).toLocaleString() : ""
-  }</small>`;
-  const delBtn = document.createElement("button");
-  delBtn.className = "task-delete";
-  delBtn.textContent = "×";
-  delBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    deleteTask(task.id);
-  });
-  meta.appendChild(delBtn);
-  el.appendChild(meta);
-
-  // double-click برای جابجایی ساده بین وضعیت‌ها (مثال: backlog -> todo -> in-progress -> review)
-  el.addEventListener("dblclick", () => {
-    const order = ["backlog", "todo", "in-progress", "review"];
-    const idx = order.indexOf(task.status);
-    const next = order[(idx + 1) % order.length];
-    updateTask(task.id, { status: next });
-  });
-
-  return el;
-}
-
-function renderTasks(tasks) {
-  clearColumns();
-  // مرتب سازی بر اساس createdAt (اختیاری)
-  tasks.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-  tasks.forEach(task => {
-    const card = createTaskCard(task);
-    switch (task.status) {
-      case "backlog":
-        backlogDrop.appendChild(card);
-        break;
-      case "todo":
-        if (todoDrop) todoDrop.appendChild(card);
-        else backlogDrop.appendChild(card);
-        break;
-      case "in-progress":
-        inProgresDrop.appendChild(card);
-        break;
-      case "review":
-        reviewDrop.appendChild(card);
-        break;
-      default:
-        backlogDrop.appendChild(card);
-    }
-  });
-}
-
-// === هندلرهای UI ===
-// if (addTodoBtn) {
-//   addTodoBtn.addEventListener("click", () => {
-//     const t = inputName.value.trim();
-//     const d = inputDesc.value.trim();
-//     if (!t) return alert("عنوان را وارد کنید");
-//     addTasks(t, d, "backlog");
-//   });
-// }
-
-
-// باز/بسته کردن فرم ساده
-if (addTodoBtn && inputCont) {
-  addTodoBtn.addEventListener("click", () => {
-    inputCont.style.display = inputCont.style.display === "block" ? "none" : "block";
-  });
-}
-
-// لود اولیه
-document.addEventListener("DOMContentLoaded", fetchTasks);
-
-const plusButtons = document.querySelectorAll(".plus");
-
-plusButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    // ستون والد رو پیدا کن
-    const section = btn.closest(".sections");
-    let status = "backlog"; // پیش‌فرض
-
-    if (section.classList.contains("backlog")) status = "backlog";
-    else if (section.classList.contains("todo-task")) status = "todo";
-    else if (section.classList.contains("in-progress")) status = "in-progress";
-    else if (section.classList.contains("review")) status = "review";
-
-    const title = prompt("عنوان فعالیت:");
-    if (title) {
-      addTasks(title, "", status);
-    }
-  });
-});

@@ -17,7 +17,12 @@
         <div class="icon-input"><i class="ri-close-line"></i></div>
         <div class="input-name">
           <i class="ri-ball-pen-line"></i
-          ><input id="input-modal-name" type="text" placeholder="نام فعالیت" />
+          ><input
+            id="input-modal-name"
+            type="text"
+            placeholder="نام فعالیت"
+            autofocus
+          />
         </div>
         <div class="input-desc">
           <i class="ri-draft-line"></i>
@@ -25,12 +30,12 @@
             id="input-modal-desc"
             type="text"
             placeholder="فرایند فعالیت"
-            required
           ></textarea>
         </div>
         <button id="add-todo-btn">ایجاد فعالیت</button>
       </div>
     </div>
+
     <main>
       <!-- -------------------------------------------------- -->
       <!-- sidebor section  -->
@@ -134,52 +139,52 @@
         <!-- btn -->
         <div class="main-section">
           <!-- backlog -->
-          <div class="backlog sections">
+          <div class="backlog sections" data-status="backtodo">
             <!-- text backlog -->
             <div class="text-task">
               <h3>کارهای عقب افتاده</h3>
               <div class="icon-todo-text">
                 <i class="ri-add-fill plus"></i>
-                <i class="ri-more-fill more"></i>
+                <i class="ri-delete-bin-line all-delete"></i>
               </div>
             </div>
             <!-- items -->
             <div class="container-item" id="backlog-drop"></div>
           </div>
           <!--todo -->
-          <div class="todo-task sections">
+          <div class="todo-task sections"   data-status="do">
             <!-- text -->
             <div class="text-task">
               <h3>انجام دادن</h3>
               <div class="icon-todo-text">
                 <i class="ri-add-fill plus"></i>
-                <i class="ri-more-fill more"></i>
+                <i class="ri-delete-bin-line all-delete"></i>
               </div>
             </div>
             <!-- items -->
             <div class="container-item" id="todo-drop"></div>
           </div>
           <!-- in progress -->
-          <div class="in-progress sections">
+          <div class="in-progress sections"  data-status="doing">
             <!-- text -->
             <div class="text-task">
               <h3>درحال انجام</h3>
               <div class="icon-todo-text">
                 <i class="ri-add-fill plus"></i>
-                <i class="ri-more-fill more"></i>
+                <i class="ri-delete-bin-line all-delete"></i>
               </div>
             </div>
             <!-- items -->
             <div class="container-item" id="in-progress-drop"></div>
           </div>
           <!-- review -->
-          <div class="review sections">
+          <div class="review sections"   data-status="complete">
             <!-- text -->
             <div class="text-task">
               <h3>بررسی</h3>
               <div class="icon-todo-text">
                 <i class="ri-add-fill plus"></i>
-                <i class="ri-more-fill more"></i>
+                <i class="ri-delete-bin-line all-delete"></i>
               </div>
             </div>
             <!-- items -->
@@ -189,6 +194,6 @@
       </div>
       <div class="section-addtodo"></div>
     </main>
-    <script src="./task.js"></script>
+    <script src="./task.js" type="module"></script>
   </body>
 </html>

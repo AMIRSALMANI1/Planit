@@ -144,6 +144,27 @@
 .active-input {
   display: grid;
 }
+.all-delete{
+  font-size: 21px;
+  color: rgba(94, 7, 121, 0.925);
+}
+.container-icon-todo{
+  display: flex;
+  justify-content: space-between;
+}
+.delete-todo-icon{
+  font-size: 20.5px;
+  color: var(--black-text);
+  cursor: pointer;
+  padding: 4px;
+  margin-right: 3px;
+}
+.edite-todo-icon{
+  font-size: 19px;
+  padding: 4px;
+  color: var(--black-text);
+  cursor: pointer;
+}
 /* -----------------------------------------------*/
 /* media */
 @media screen and (max-width: 1000px) {
