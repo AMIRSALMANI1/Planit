@@ -19,7 +19,7 @@
   padding: 0 15px 10px 45px;
   border-radius: 12px;
   overflow-y: auto;
-} 
+}
 .main-section {
   min-height: 75vh;
   display: flex;
@@ -144,22 +144,22 @@
 .active-input {
   display: grid;
 }
-.all-delete{
+.all-delete {
   font-size: 21px;
   color: rgba(94, 7, 121, 0.925);
 }
-.container-icon-todo{
+.container-icon-todo {
   display: flex;
   justify-content: space-between;
 }
-.delete-todo-icon{
+.delete-todo-icon {
   font-size: 20.5px;
   color: var(--black-text);
   cursor: pointer;
   padding: 4px;
   margin-right: 3px;
 }
-.edite-todo-icon{
+.edite-todo-icon {
   font-size: 19px;
   padding: 4px;
   color: var(--black-text);
@@ -172,4 +172,30 @@
     width: 100%;
     padding-right: 50px;
   }
+}
+
+.alert {
+  width: 250px;
+  height: 50px;
+  background-color: rgb(34, 139, 34);
+  color: white;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.062);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+  transform: translateX(-50px);
+}
+.alert.show {
+  opacity: 1;
+  transform: translateX(10px);
+  pointer-events: auto;
+  z-index: 1000;
 }

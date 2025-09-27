@@ -1,5 +1,5 @@
 "use strice";
-import { createTodo, getTodos } from "../js/api.js";
+import { createTodo, deleteTodo, getTodos } from "../js/api.js";
 // sidebor  menu
 function toggleMenu(id) {
   const arrow = document.getElementById("arrow-" + id);
@@ -14,6 +14,8 @@ const backLog = document.querySelector(".backlog");
 const toDo = document.querySelector(".todo-task");
 const inrPogress = document.querySelector(".in-progress");
 const review = document.querySelector(".review");
+// alert
+const alert = document.querySelector(".alert");
 
 // section add todo
 
@@ -34,7 +36,6 @@ plus.forEach((item) => {
   item.addEventListener("click", () => {
     containerColumn = item.closest(".sections");
     containerModal.classList.toggle("active-input");
-
   });
 });
 // close modal
@@ -69,11 +70,16 @@ const persianDate = new Intl.DateTimeFormat("fa-IR", option).format(now);
 addTodoBtn.addEventListener("click", async () => {
   const title = inputName.value.trim();
   const desc = inputDesc.value.trim();
+  let status = "do";
+  if (containerColumn) {
+    status = containerColumn.dataset.status;
+  }
+
   if (!title) return;
   const newTodo = {
     title: title,
     discription: desc,
-    status: containerColumn,
+    status: status,
     createdAt: new Date(),
   };
   const result = await createTodo(newTodo);
@@ -82,39 +88,45 @@ addTodoBtn.addEventListener("click", async () => {
   // drag and drop
 });
 // delete item
-document.addEventListener("click", (e) => {
+document.addEventListener("click", async (e) => {
   const deleteBtn = e.target.closest(".delete-todo-icon");
+  const id = deleteBtn?.dataset.id;
+
   if (!deleteBtn) return;
   const card = deleteBtn.parentElement.parentElement.parentElement;
   if (!card) return;
-
   card.remove();
+  await deleteTodo(id);
+  alert.classList.add("show");
+  setTimeout(() => {
+    alert.classList.remove("show");
+  }, 2000);
 });
 
 // add todo html
-const addTodoFun = function (titel, desc, status) {
+const addTodoFun = function (title, desc, status, id) {
   const todoDiv = document.createElement("div");
   todoDiv.classList.add("item", "container-planning");
   todoDiv.setAttribute("draggable", "true");
   dragAndDrop(todoDiv);
 
   todoDiv.innerHTML = `       
-  <!-- ${titel} -->
+  <!-- ${title} -->
 
   <!-- button -->
   <div class = 'container-icon-todo'>
-  <div class="planning-cont">${titel}</div>
+  <div class="planning-cont">${status}</div>
     <div class="icons-todo">
-      <i class="ri-close-circle-line delete-todo-icon"></i>
+      <i class="ri-close-circle-line delete-todo-icon" data-id="${id}"></i>
       <i class="ri-edit-line edite-todo-icon"></i>
     </div>
 </div>
   <div class="cont-text-todo">
-  <p>بروز رسانی فهرست نیازمندی ها</p>
+  <p>${title}</p>
   <p class="create">${desc}</p>
   <div class="date">${persianDate}</div>
   `;
-  
+
   switch (status) {
     case "doing":
       containerColumn = document.querySelector(`[data-status="${status}"]`);
@@ -131,8 +143,9 @@ const addTodoFun = function (titel, desc, status) {
     default:
       break;
   }
-
-  console.log(column);
+  if (!containerColumn) {
+    containerColumn = document.querySelector(`[data-status="do"]`);
+  }
 
   containerColumn.querySelector(".container-item").appendChild(todoDiv);
   containerModal.classList.toggle("active-input");
@@ -194,10 +207,9 @@ const clearModalInput = function () {
 // update ui
 async function updateUI() {
   const dataTodos = await getTodos();
-
   for (let i = 0; i < dataTodos.length; i++) {
     const todo = dataTodos[i];
-    addTodoFun(todo.title, todo.discription, todo.status);
+    addTodoFun(todo.title, todo.discription, todo.status, todo.id);
   }
 }
 updateUI();
