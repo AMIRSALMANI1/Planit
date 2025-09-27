@@ -12,24 +12,24 @@ export async function createTodo(todo) {
   } catch (error) {}
 }
 
-export  async function getTodos() {
-      try {
+export async function getTodos() {
+  try {
     const response = await fetch(`${BASE_URL}/todos`, {
       method: "GET",
       headers: { "content-type": "application/json" },
     });
     const data = await response.json();
-   return data
+    return data;
   } catch (error) {}
 }
 
-// export async function deleteTodo(params) {
-//         try {
-//     const response = await fetch(`${BASE_URL}/todos`, {
-//       method: "DELETE",
-//       headers: { "content-type": "application/json" },
-//     });
-//     const data = await response.json();
-//    return data
-//   } catch (error) {}
-// }
+export async function deleteTodo(id) {
+  try {
+    const response = await fetch(`${BASE_URL}/todos/${id}`, {
+      method: "DELETE",
+      headers: { "content-type": "application/json" },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {}
+}
